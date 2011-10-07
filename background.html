@@ -1,7 +1,7 @@
 <script>
 
-	var api_key = "62be1c8445c92c28e5b36f548c069f69";
-	var api_secret = "371780d53d282c42b3e50229df3df313";
+	var api_key = "4e42bd55495840f6788e1cf63260df71";
+	var api_secret = "7d120fc20b99599aa9ef9f198cd24a41";
 	var session_id;
 	
 	chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
@@ -13,6 +13,8 @@
 			create_session();
 		else if (request.method == "scrobbleTrack")
 			scrobble(request.artist,request.track,request.session_token);
+		else if (request.method == "getUsername")
+			sendResponse(localStorage['lastfm-username'])
 	    else
 	      sendResponse(); // snub them.
 	});
@@ -53,7 +55,7 @@
  		};
 				 
  	  	xhr.send();
-		//console.log("Made XHR request: "+url + '?method=' + api_call + '&' + stringify(params));
+		console.log("Made XHR request: "+url + '?method=' + api_call + '&' + stringify(params));
 		
 	}
 
@@ -87,6 +89,7 @@
 					session_response = JSON.parse(xhr.responseText);
 					//console.log("Received data: "+xhr.responseText);
 					localStorage['lastfm-session-token'] = session_response.session.key;
+					localStorage['lastfm-username'] = session_response.session.name;
 					
 				}
 			}
@@ -94,7 +97,7 @@
 				 
  	  	xhr.send();
 
-		//console.log("Made XHR request: "+url + '?method=' + api_call + '&' + stringify(params));
+		console.log("Made XHR request: "+url + '?method=' + api_call + '&' + stringify(params));
 	}
 	
 	
