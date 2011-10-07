@@ -1,14 +1,18 @@
 {
-  "name": "TurntableScrobble",
+  "name": "Pandora HTML 5 Scrobbler",
   "version": "1.0",
-  "description": "Scrobble what you're listening to on Turntable.fm.",
+  "description": "Scrobble pandora to your last.fm account.",
+  "browser_action": {
+    "default_icon": "icon.png",
+	"popup": "popup.html"
+  },
   "background_page": "background.html",
   "permissions": [
     "http://ws.audioscrobbler.com/*",
 	"tabs"
   ],
 	"content_scripts": [ {
-  		"matches": ["http://turntable.fm/*"],
+  		"matches": ["http://www.pandora.com/*"],
   		"js": ["contentscript.js"]
 	} 
 	]
