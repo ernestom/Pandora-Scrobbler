@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			function get_authenticated() {
+				var method = 'POST';
+				var callback = chrome.extension.getURL("authenticate.html");
+				var url = 'http://www.last.fm/api/auth/?api_key=4e42bd55495840f6788e1cf63260df71&cb='+callback;
+
+				javascript:window.open(url);
+			}
+		</script>
+	</head>
+	<body>
+		Login with:<br /><br />
+		<a href="#" onclick="get_authenticated();"><img src="lastfm_red_small.gif" /></a><br /><br />
+		Logged in as: <span id="username"></span>
+		<script>
+			document.getElementById('username').innerHTML = localStorage['lastfm-username'];
+		</script>
+	</body>
+</html>
