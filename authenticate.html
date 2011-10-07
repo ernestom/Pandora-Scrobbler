@@ -8,11 +8,11 @@
 	});
 	
 	console.log("Requesting session token");
-	 chrome.extension.sendRequest({method: "createSession"}, function(session_token) {
-	 	localStorage["lastfm-session-token"] = session_token;
-	 	console.log("Received session: "+session_token);
-	 });
+	chrome.extension.sendRequest({method: "createSession"}, function(session_token) {
+		localStorage["lastfm-session-token"] = session_token;
+		console.log("Received session: "+session_token);
+	});
 </script>
 
 
-Please reload your turntable.fm tab.  Feel free to close this one.
+Please reload your pandora tab.  Feel free to close this one.
