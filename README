@@ -1,11 +1,9 @@
-This code has been merged into a larger project at https://github.com/MarkReeder/Turntable.fm-Extensions so look there for maintained code.
--------
-This is a Chrome extension that will allow you to scrobble to Last.FM what is being played on the social DJ service Turntable.FM.
+This is a Chrome extension that will allow you to scrobble to Last.FM what is being played on the Pandora HTML 5 interface.
+
+This extension is forked from gabek/TurntableScrobbler. 
 
 * Install it
 * Authenticate to Last.FM
-* Reload your Turntable.FM browser tab (I'll fix this soon if people actually use this)
+* Reload your Pandora browser tab
 
 Note: There's currently no handling of errors on Last.FM's side.
-
-Enjoy your DJ'ing!
