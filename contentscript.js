@@ -1,49 +1,46 @@
-var title_string;
-var artist_string;
-var chat_message;
-var existing_track_message;
 var lastfm_token;
 var session_token;
 
+var song = null;
+var artist = null;
 var api_key = "62be1c8445c92c28e5b36f548c069f69";
 var api_secret = "371780d53d282c42b3e50229df3df313";
 
-console.log('TurntableScrobbler loaded.');
+console.log('Pandora HTML 5 scrobbler loaded.');
 
 check_for_authentication();
 
-function checkForChange() {
-	//Uses the " started playing "Ayo For Yayo" by Andre Nickatina" string
-	
-	chat_messages = document.getElementsByClassName("message");
-	
-	//Make sure there's crap in the chat box first
-	if (chat_messages.length > 0) {
-		chat_message = chat_messages[chat_messages.length -1].childNodes[1].innerHTML;
+document.addEventListener("DOMSubtreeModified", function(event){
+		//console.log("AJAX event");
+		//console.log(event);
 		
-		//console.log("Existing is: "+existing_track_message + " New is: "+chat_message);
-		
-		if (chat_message != existing_track_message && chat_message.indexOf("started playing") == 1) {
-			existing_track_message = chat_message;
-			
-			//Figure out the artist and track
-			track_string_begins = chat_message.indexOf('"');
-			track_string_ends = chat_message.indexOf('"',track_string_begins + 1);
-			track_string = chat_message.substr(track_string_begins+1,track_string_ends - track_string_begins-1);
-			artist_string = chat_message.substr(track_string_ends+5);
-
-			//Figure out the track length
-			//length_raw_string = document.getElementById('songboard_title').innerHTML;
-			//track_length = length_raw_string.substr(length_raw_string.indexOf(" - ") + 3);
-			
-		
-			console.log("Scrobbling: " + artist_string + " - " + track_string);
-			
-			scrobble(artist_string,track_string,localStorage["lastfm-session-token"]);
-			
+		// Check for song update
+		if (event.srcElement.className == 'playerBarSong') {
+			song = event.srcElement.innerText;
 		}
-	}
-}	
+		
+		// Check for artist update
+		if (event.srcElement.className == 'playerBarArtist') {
+			artist = event.srcElement.innerText;
+		}
+		
+		// Check to see if we have found a valid artist and song, also make sure it wasn't recently found
+		if ((song && artist) && (localStorage['existingTrack'] != artist + " - " + song)) {
+			console.log("Found: " + artist + " - " + song);
+			localStorage['existingTrack'] = artist + " - " + song;
+			
+			// Scrobble
+			scrobble(artist,song,localStorage["lastfm-session-token"]);
+			
+			song = null;
+			artist = null;
+		} else if ((song && artist) && localStorage['existingTrack'] == artist + " - " + song) {
+			// We found a song in progress so don't scrobble it twice
+			console.log("Found existing track, skipping");
+			song = null;
+			artist = null;
+		}
+})
 
 function get_authenticated() {
 	var method = 'POST';
@@ -71,7 +68,7 @@ function check_for_authentication() {
 	} else {
 		console.log("Found authentication token.  Moving on.");
 				
-		setInterval("checkForChange()",1000);
+		//setInterval("checkForChange()",1000);
 		lastfm_token = localStorage["lastfm_token"];
 		lastfm_session_token = localStorage["lastfm-session-token"];
 	}
