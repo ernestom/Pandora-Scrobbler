@@ -3,8 +3,8 @@ var session_token;
 
 var song = null;
 var artist = null;
-var api_key = "62be1c8445c92c28e5b36f548c069f69";
-var api_secret = "371780d53d282c42b3e50229df3df313";
+var api_key = "b5a5a20f883d64ecd3ecf3d625878403";
+var api_secret = "f08d501bd5e3645d5bc9cf97dbf81d92";
 
 console.log('Pandora HTML 5 scrobbler loaded.');
 
