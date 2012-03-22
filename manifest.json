@@ -1,6 +1,6 @@
 {
   "name": "Pandora HTML 5 Scrobbler",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Scrobble pandora to your last.fm account.",
   "browser_action": {
     "default_icon": "icon.png",

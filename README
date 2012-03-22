@@ -1,6 +1,6 @@
 This is a Chrome extension that will allow you to scrobble to Last.FM what is being played on the Pandora HTML 5 interface.
 
-This extension is forked from gabek/TurntableScrobbler. 
+This extension is forked from gabek/TurntableScrobbler and dremex/Pandora-Scrobbler. 
 
 * Install it
 * Authenticate to Last.FM
